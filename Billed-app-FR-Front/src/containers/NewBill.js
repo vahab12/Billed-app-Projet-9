@@ -18,27 +18,22 @@ export default class NewBill {
     new Logout({ document, localStorage, onNavigate });
   }
 
-  /**********Ajaur de la fonction filValidation*********/
   fileValidation = (file) => {
-    //On verifie le type de fichier à uploader
+    //TODO 3 - On verifie le type de fichier à uploader
     const fileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-    //si fileTypes n'est pas includ, ajaut de claslist 'is invalid' et returne fals
     if (!fileTypes.includes(file.type)) {
       this.document
         .querySelector(`input[data-testid="file"]`)
         .classList.add('is-invalid');
       return false;
-      //Sinon remove 'is invalid' classlist et returne true
-    } else {
-      this.document
-        .querySelector(`input[data-testid="file"]`)
-        .classList.remove('is-invalid');
-      return true;
     }
+    this.document
+      .querySelector(`input[data-testid="file"]`)
+      .classList.remove('is-invalid');
+    return true;
   };
 
-  /**********??????Ajaut d'async devant la fonction??????**********/
-  handleChangeFile = (e) => {
+  handleChangeFile = async (e) => {
     e.preventDefault();
     const file = this.document.querySelector(`input[data-testid="file"]`)
       .files[0];
@@ -49,9 +44,8 @@ export default class NewBill {
     formData.append('file', file);
     formData.append('email', email);
 
-    /********** Ajaut de "this.fileValidation(file) &&"**********/
     this.fileValidation(file) &&
-      this.store //Si type de fichier incorrect, on ne l'envoie pas vers le store
+      this.store //TODO 3 / si type de fichier incorrect, on ne l'envoie pas vers le store
         .bills()
         .create({
           data: formData,
@@ -60,7 +54,6 @@ export default class NewBill {
           },
         })
         .then(({ fileUrl, key }) => {
-          console.log(fileUrl);
           this.billId = key;
           this.fileUrl = fileUrl;
           this.fileName = fileName;
@@ -70,13 +63,6 @@ export default class NewBill {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    //*****Commanté le consol log */
-    /*
-    console.log(
-      'e.target.querySelector(`input[data-testid="datepicker"]`).value',
-      e.target.querySelector(`input[data-testid="datepicker"]`).value
-    );
- */
     const email = JSON.parse(localStorage.getItem('user')).email;
     const bill = {
       email,
@@ -97,14 +83,14 @@ export default class NewBill {
       status: 'pending',
     };
 
-    /***********Ajaut de "if (!this.fileName) return;" **************/
     if (!this.fileName) return;
-    //Si pas de fichier selectionné, submit impossible
+    //TODO 3 - si pas de fichier selectionné, submit impossible
     this.updateBill(bill);
     this.onNavigate(ROUTES_PATH['Bills']);
   };
 
   // not need to cover this function by tests
+  /* istanbul ignore next */
   updateBill = (bill) => {
     if (this.store) {
       this.store

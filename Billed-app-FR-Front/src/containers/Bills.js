@@ -5,18 +5,25 @@ import Logout from './Logout.js';
 export default class {
   constructor({ document, onNavigate, store, localStorage }) {
     this.document = document;
+
     this.onNavigate = onNavigate;
+
     this.store = store;
+
     const buttonNewBill = document.querySelector(
       `button[data-testid="btn-new-bill"]`
     );
+
     if (buttonNewBill)
       buttonNewBill.addEventListener('click', this.handleClickNewBill);
+
     const iconEye = document.querySelectorAll(`div[data-testid="icon-eye"]`);
+
     if (iconEye)
       iconEye.forEach((icon) => {
         icon.addEventListener('click', () => this.handleClickIconEye(icon));
       });
+
     new Logout({ document, localStorage, onNavigate });
   }
 
@@ -26,7 +33,9 @@ export default class {
 
   handleClickIconEye = (icon) => {
     const billUrl = icon.getAttribute('data-bill-url');
+
     const imgWidth = Math.floor($('#modaleFile').width() * 0.5);
+
     $('#modaleFile')
       .find('.modal-body')
       .html(
@@ -43,7 +52,8 @@ export default class {
         .then((snapshot) => {
           const bills = snapshot
             /***** On trie dans l'ordre par date *****/
-            .sort((a, b) => new Date(b.date) - new Date(a.date))
+            //.sort((a, b) => new Date(b.date) - new Date(a.date))
+            .sort((a, b) => (a.date < b.date ? 1 : -1))
             .map((doc) => {
               try {
                 return {
@@ -54,7 +64,7 @@ export default class {
               } catch (e) {
                 // if for some reason, corrupted data was introduced, we manage here failing formatDate function
                 // log the error and return unformatted date in that case
-                console.log(e, 'for', doc);
+                //console.log(e, 'for', doc);
                 return {
                   ...doc,
                   date: doc.date,
@@ -62,7 +72,7 @@ export default class {
                 };
               }
             });
-          console.log('length', bills.length);
+          //console.log('length', bills.length);
           return bills;
         });
     }
