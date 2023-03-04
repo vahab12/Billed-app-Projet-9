@@ -153,13 +153,7 @@ export default class {
       $(`#status-bills-container${this.index}`).html('');
       this.counter++;
     }
-    /*
-    bills.forEach((bill) => {
-      $(`#open-bill${bill.id}`).click((e) =>
-        this.handleEditTicket(e, bill, bills)
-      );
-    });*/
-
+    // CORRECTION DU BUD
     bills.forEach((bill) => {
       /*Nous avons Ajauter "$(`#open-bill${bill.id}`).off('click');" + off et on
         On remove l'evenement en click existant avant d'en ajouter un autre

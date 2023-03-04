@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "backend app for billapp",
   "main": "server.js",
-  "author": "techer jean sebastien <techerjeansebastien.pro@gmail.com>",
-  "license": "MIT",
+  "author": "Vahab <vahabpro@gmail.com>",
+  "license": "VZ",
   "scripts": {
     "test": "NODE_ENV=test sequelize-cli db:migrate && jest test -i tests/user.test.js --watch",
     "run:dev": "NODE_ENV=development sequelize-cli db:migrate && node server.js",

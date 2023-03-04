@@ -18,8 +18,8 @@ export default class NewBill {
     new Logout({ document, localStorage, onNavigate });
   }
 
+  //TODO 3 - On verifie le type de fichier à uploader
   fileValidation = (file) => {
-    //TODO 3 - On verifie le type de fichier à uploader
     const fileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
     if (!fileTypes.includes(file.type)) {
       this.document
@@ -32,6 +32,7 @@ export default class NewBill {
       .classList.remove('is-invalid');
     return true;
   };
+  //*** */
 
   handleChangeFile = async (e) => {
     e.preventDefault();
@@ -43,9 +44,10 @@ export default class NewBill {
     const email = JSON.parse(localStorage.getItem('user')).email;
     formData.append('file', file);
     formData.append('email', email);
-
+    //TODO 3 / si type de fichier incorrect, on ne l'envoie pas vers le store
     this.fileValidation(file) &&
-      this.store //TODO 3 / si type de fichier incorrect, on ne l'envoie pas vers le store
+      /**** */
+      this.store
         .bills()
         .create({
           data: formData,
@@ -82,9 +84,9 @@ export default class NewBill {
       fileName: this.fileName,
       status: 'pending',
     };
-
-    if (!this.fileName) return;
     //TODO 3 - si pas de fichier selectionné, submit impossible
+    //if (!this.fileName) return;
+    //***************************** */
     this.updateBill(bill);
     this.onNavigate(ROUTES_PATH['Bills']);
   };
