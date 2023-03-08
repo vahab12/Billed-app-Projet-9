@@ -25,6 +25,7 @@ export default class NewBill {
       this.document
         .querySelector(`input[data-testid="file"]`)
         .classList.add('is-invalid');
+      alert('les fichiers doient être en format jpeg,jpg et png');
       return false;
     }
     this.document
@@ -85,7 +86,7 @@ export default class NewBill {
       status: 'pending',
     };
     //TODO 3 - si pas de fichier selectionné, submit impossible
-    //if (!this.fileName) return;
+    if (!this.fileName) return;
     //***************************** */
     this.updateBill(bill);
     this.onNavigate(ROUTES_PATH['Bills']);

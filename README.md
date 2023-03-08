@@ -9,13 +9,3 @@ Objectif:
 2-Ajouter des tests unitaires et d'intégration.
 
 3-Rédiger un plan de test End-to-End.
-
-Compétences acquises:
-
-Ecrire des tests unitaires avec JavaScript
-
-Débugger une application web avec le Chrome Debugger
-
-Rédiger un plan de test end-to-end manuel
-
-Ecrire des tests d'intégration avec JavaScript

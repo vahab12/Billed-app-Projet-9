@@ -239,9 +239,9 @@ describe('Given I am connected as an employee', () => {
     // --------------------------------------------------------- //
 
     //Lorsque je suis sur la page NewBill et que je télécharge un fichier avec une extension autre que jpg, jpeg ou png'.
-    //Ensuite, un message d'erreur pour l'entrée du fichier devrait être affiché
+    //Ensuite, un message alert  devrait être affiché en haut de la page
     describe('When I am on NewBill page and I upload a file with an extension other than jpg, jpeg or png', () => {
-      test('Then an error message for the file input should be displayed', () => {
+      test('Then an alert message should be displayed on top of the page', () => {
         const newBill = setNewBill();
 
         const handleChangeFile = jest.spyOn(newBill, 'handleChangeFile');
